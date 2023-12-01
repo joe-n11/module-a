@@ -15,13 +15,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Build
-        uses: ./.github/workflows/build.yml
+      - name: Install modules
+        run: yarn install
       - name: Update your package.json with an npm pre-release version
         id: pre-release-version
         uses: adobe/update-prerelease-npm-version@v1.0.0
         with:
           pre-release-tag: 'snapshot' 
           package-name: "package-snapshot"
+      - name: Build
+        run: yarn build
       - name: Publish
         run: yarn publish

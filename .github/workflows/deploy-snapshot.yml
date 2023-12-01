@@ -22,7 +22,8 @@ jobs:
         uses: adobe/update-prerelease-npm-version@v1.0.0
         with:
           pre-release-tag: 'snapshot' 
-          package-name: "package-snapshot"
+          package-name: 'package-snapshot'
+          skip-dependencies-to-update: true
       - name: Build
         run: yarn build
       - name: Publish

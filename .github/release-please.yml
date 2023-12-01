@@ -1,0 +1,54 @@
+name: Release please
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    environment: prod
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - id: release
+        uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: node
+          package-name: package
+          token: ${{ secrets.ACTIONS_PAT }}
+          changelog-types: >-
+            [
+              {"type":"feat","section":"Features","hidden":false},
+              {"type":"fix","section":"Bug Fixes","hidden":false},
+              {"type":"docs","section":"Other","hidden":false},
+              {"type":"refactor","section":"Other","hidden":false},
+              {"type":"ci","section":"Other","hidden":false},
+              {"type":"test","section":"Other","hidden":false},
+              {"type":"chore","section":"Other","hidden":true}
+            ]
+
+  production-deployment-eu:
+    needs:
+      - release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: prod
+      region: eu-central-1
+      tag: ${{ needs.release-please.outputs.tag_name }}
+    secrets: inherit
+
+  production-deployment-ap:
+    needs:
+      - release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: prod
+      region: ap-southeast-1
+      tag: ${{ needs.release-please.outputs.tag_name }}
+    secrets: inherit

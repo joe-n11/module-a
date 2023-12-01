@@ -4,6 +4,9 @@
   "license": "UNLICENSED",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
+  "publishConfig": {
+    "@joe-n11:registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "build": "tsc -b --verbose"
   },

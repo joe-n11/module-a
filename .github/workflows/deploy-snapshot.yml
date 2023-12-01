@@ -28,7 +28,7 @@ jobs:
           skip-dependencies-to-update: true
       - name: Build
         run: yarn build
-      - run: yarn --version
+      - run: yarn login
       - name: Publish
         run: yarn publish
         env:

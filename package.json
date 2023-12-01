@@ -1,5 +1,5 @@
 {
-  "name": "module-a",
+  "name": "module",
   "version": "1.0.0",
   "license": "UNLICENSED",
   "main": "build/src/index.js",

@@ -21,8 +21,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://npm.pkg.github.com'
-      - name: Install modules
-        run: yarn install
       - name: Update your package.json with an npm pre-release version
         id: pre-release-version
         uses: adobe/update-prerelease-npm-version@v1.1.0
@@ -30,10 +28,9 @@ jobs:
           pre-release-tag: 'snapshot' 
           package-name: 'package-snapshot'
           skip-dependencies-to-update: true
+      - run: yarn install
       - run: yarn build
-      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN : ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN : ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

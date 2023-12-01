@@ -9,6 +9,11 @@ jobs:
     strategy:
       matrix:
         node-version: [18]
+    permissions:
+      contents: write
+      pull-requests: read
+      packages: write
+      deployments: write
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -16,7 +21,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@joe-n11'
+          cache: 'yarn'
       - name: Install modules
         run: yarn install
       - name: Update your package.json with an npm pre-release version
@@ -26,10 +31,8 @@ jobs:
           pre-release-tag: 'snapshot' 
           package-name: 'package-snapshot'
           skip-dependencies-to-update: true
-      - name: Build
-        run: yarn build
-      - run: yarn login
-      - name: Publish
-        run: yarn publish
+      - run: yarn build
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

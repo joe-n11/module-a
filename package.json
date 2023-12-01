@@ -1,7 +1,6 @@
 {
-  "name": "module",
+  "name": "test-module",
   "version": "1.0.0",
-  "license": "UNLICENSED",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
   "files": ["build"],

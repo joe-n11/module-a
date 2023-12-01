@@ -28,9 +28,8 @@ jobs:
           skip-dependencies-to-update: true
       - name: Build
         run: yarn build
-      - name: Set NPM registry
-        run: yarn config set @joe-n11:registry https://npm.pkg.github.com
+      - run: yarn --version
       - name: Publish
-        run: yarn npm publish
+        run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

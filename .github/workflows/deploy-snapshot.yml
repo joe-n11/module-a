@@ -31,10 +31,8 @@ jobs:
           package-name: 'package-snapshot'
           skip-dependencies-to-update: true
       - run: yarn build
-      - run: yarn config set @joe-n11:registry https://npm.pkg.github.com
-      - run: echo "${{ secrets.GITHUB_TOKEN }}"
-      
-      # - run: yarn publish
-      #  env:
-      #    NPM_AUTH_TOKEN : ${{ secrets.GITHUB_TOKEN }}
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN : ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN : ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

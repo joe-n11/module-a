@@ -7,6 +7,10 @@
   "publishConfig": {
     "@joe-n11:registry": "https://npm.pkg.github.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joe-n11/snapshot-release.git"
+},
   "scripts": {
     "build": "tsc -b --verbose"
   },

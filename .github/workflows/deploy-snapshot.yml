@@ -31,6 +31,7 @@ jobs:
           package-name: 'package-snapshot'
           skip-dependencies-to-update: true
       - run: yarn build
+      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN : ${{ secrets.GITHUB_TOKEN }}

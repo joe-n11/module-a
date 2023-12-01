@@ -23,9 +23,6 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
       - name: Install modules
         run: yarn install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Update your package.json with an npm pre-release version
         id: pre-release-version
         uses: adobe/update-prerelease-npm-version@v1.1.0
@@ -34,9 +31,7 @@ jobs:
           package-name: 'package-snapshot'
           skip-dependencies-to-update: true
       - run: yarn build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn config set @joe-n11:registry https://npm.pkg.github.com
       - run: yarn publish
         env:
           NPM_AUTH_TOKEN : ${{ secrets.GITHUB_TOKEN }}

@@ -30,20 +30,9 @@ jobs:
               {"type":"chore","section":"Other","hidden":true}
             ]
 
-  production-deployment-eu:
+  deployment:
     needs:
       - release-please
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
     uses: ./.github/workflows/deploy.yml
-    with:
-      tag: ${{ needs.release-please.outputs.tag_name }}
-    secrets: inherit
-
-  production-deployment-ap:
-    needs:
-      - release-please
-    if: ${{ needs.release-please.outputs.release_created == 'true' }}
-    uses: ./.github/workflows/deploy.yml
-    with:
-      tag: ${{ needs.release-please.outputs.tag_name }}
     secrets: inherit

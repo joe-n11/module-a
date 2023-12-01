@@ -4,13 +4,14 @@
   "license": "UNLICENSED",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
+  "files": ["build"],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joe-n11/snapshot-release.git"
-},
+  },
   "scripts": {
     "build": "tsc -b --verbose"
   },

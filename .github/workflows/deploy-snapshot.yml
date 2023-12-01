@@ -25,12 +25,11 @@ jobs:
         id: pre-release-version
         uses: adobe/update-prerelease-npm-version@v1.1.0
         with:
-          pre-release-tag: 'snapshot' 
           package-name: 'package-snapshot'
           skip-dependencies-to-update: true
       - run: yarn install
       - run: yarn build
-      - run: yarn publish
+      - run: yarn publish --tag SNAPSHOT
         env:
           NODE_AUTH_TOKEN : ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN : ${{ secrets.GITHUB_TOKEN }}

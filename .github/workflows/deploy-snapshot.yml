@@ -15,6 +15,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          always-auth: true
+          registry-url: 'https://npm.pkg.github.com'
       - name: Install modules
         run: yarn install
       - name: Update your package.json with an npm pre-release version

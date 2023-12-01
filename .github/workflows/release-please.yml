@@ -9,7 +9,6 @@ on:
 jobs:
   release-please:
     runs-on: ubuntu-latest
-    environment: prod
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
@@ -37,8 +36,6 @@ jobs:
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
     uses: ./.github/workflows/deploy.yml
     with:
-      environment: prod
-      region: eu-central-1
       tag: ${{ needs.release-please.outputs.tag_name }}
     secrets: inherit
 
@@ -48,7 +45,5 @@ jobs:
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
     uses: ./.github/workflows/deploy.yml
     with:
-      environment: prod
-      region: ap-southeast-1
       tag: ${{ needs.release-please.outputs.tag_name }}
     secrets: inherit

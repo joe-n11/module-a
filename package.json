@@ -1,5 +1,5 @@
 {
-  "name": "test-module",
+  "name": "@joe-n11/module-a",
   "version": "1.0.0",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -7,10 +7,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/joe-n11/module-a.git"
-  },
+  "repository": "https://github.com/joe-n11/module-a.git",
   "scripts": {
     "build": "tsc -b --verbose"
   },

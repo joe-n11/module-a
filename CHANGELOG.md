@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/joe-n11/module-a/compare/v1.0.0...v1.0.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* create README.md ([786d5ff](https://github.com/joe-n11/module-a/commit/786d5ff4f2976ef61500d96245366765f856ef65))
+
 ## 1.0.0 (2023-12-05)
 
 

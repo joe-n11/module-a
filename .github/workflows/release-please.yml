@@ -17,7 +17,7 @@ jobs:
         uses: google-github-actions/release-please-action@v3
         with:
           release-type: node
-          package-name: package
+          package-name: module-a
           token: ${{ secrets.GITHUB_TOKEN }}
           changelog-types: >-
             [

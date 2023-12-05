@@ -14,8 +14,12 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
+          registry-url: 'https://npm.pkg.github.com'
           node-version: ${{ matrix.node-version }}
-      - name: Build
-        uses: ./.github/workflows/build.yml
-      - name: Publish
-        run: yarn publish
+      - run: yarn install
+        env: 
+          NODE_AUTH_TOKEN: ${{ secrets.ACTIONS_PAT }}
+      - run: yarn build
+      - run: yarn publish
+        env: 
+          NODE_AUTH_TOKEN: ${{ secrets.ACTIONS_PAT }}

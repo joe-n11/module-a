@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/joe-n11/module-a/compare/v1.0.1...v1.0.2) (2023-12-13)
+
+
+### Bug Fixes
+
+* rework ci/cd ([5c17fad](https://github.com/joe-n11/module-a/commit/5c17fad0179b13660fd2eb07beb2e6ca757907c8))
+
 ## [1.0.1](https://github.com/joe-n11/module-a/compare/v1.0.0...v1.0.1) (2023-12-05)
 
 

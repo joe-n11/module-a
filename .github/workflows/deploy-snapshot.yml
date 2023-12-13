@@ -15,20 +15,13 @@ jobs:
       packages: write
       deployments: write
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: 'https://npm.pkg.github.com'
+      - uses: ./github/workflows/build.yml
       - name: Update your package.json with an npm pre-release version
         id: pre-release-version
         uses: adobe/update-prerelease-npm-version@v1.1.0
         with:
           pre-release-tag: 'snapshot' 
           skip-dependencies-to-update: true
-      - run: yarn install
-      - run: yarn build
       - run: yarn publish --tag SNAPSHOT
         env:
           NODE_AUTH_TOKEN : ${{ secrets.ACTIONS_PAT }}

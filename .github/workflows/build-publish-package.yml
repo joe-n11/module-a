@@ -7,14 +7,14 @@ on:
       deployVersion:
         description: 'Boolean flag to create a new release'
         required: false
-        default: false
+        default: true
         type: boolean
   workflow_dispatch:
     inputs:
       deploySnapshot:
         description: 'Boolean flag to create a new snapshot release'
         required: false
-        default: false
+        default: true
         type: boolean
       snapshotTag:
         description: 'Package tag for snapshot release'

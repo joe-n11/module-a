@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/joe-n11/module-a/compare/v1.0.2...v1.0.3) (2023-12-13)
+
+
+### Bug Fixes
+
+* Update README.md ([efcee47](https://github.com/joe-n11/module-a/commit/efcee4780bbdd598e8278f3f9a01d2f347ff333e))
+
 ## [1.0.2](https://github.com/joe-n11/module-a/compare/v1.0.1...v1.0.2) (2023-12-13)
 
 

@@ -1,0 +1,69 @@
+name: Build and deploy
+
+on:
+  push:
+  workflow_call:
+    inputs:
+      deployVersion:
+        description: 'Boolean flag to create a new release'
+        required: false
+        default: false
+        type: boolean
+  workflow_dispatch:
+    inputs:
+      deploySnapshot:
+        description: 'Boolean flag to create a new snapshot release'
+        required: false
+        default: false
+        type: boolean
+      snapshotTag:
+        description: 'Package tag for snapshot release'
+        required: false
+        default: 'SNAPSHOT'
+        type: string
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://npm.pkg.github.com'
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.ACTIONS_PAT }}
+      
+      - name: Update your package.json with an npm pre-release version
+        id: pre-release-version
+        uses: adobe/update-prerelease-npm-version@v1.1.0
+        if: ${{ inputs.deploySnapshot }}
+        with:
+          pre-release-tag: 'snapshot'
+          skip-dependencies-to-update: true
+      
+      - name: Build
+        run: yarn build
+
+      - name: Publish snapshot release
+        id: snapshot-release
+        if: ${{ inputs.deploySnapshot }}
+        run: yarn publish --tag ${{ inputs.snapshotTag }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.ACTIONS_PAT }}
+
+      - name: Publish release
+        id: release
+        if: ${{ inputs.deployVersion }}
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.ACTIONS_PAT }}

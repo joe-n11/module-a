@@ -34,5 +34,5 @@ jobs:
     needs:
       - release-please
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/build-publish-package.yml
     secrets: inherit
